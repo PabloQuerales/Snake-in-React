@@ -3,272 +3,69 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const PrincipalBoard = () => {
-	const [col, setCol] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-	const [row, setRow] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+	const [board, setBoard] = useState([
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	]);
 
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyDown, true);
 	}, []);
-	const handleKeyDown = (e) => {
-		console.log(e.key);
+	const positions = [];
+	const findSnakePositions = (board) => {
+		board.forEach((row, rowIndex) => {
+			row.forEach((cell, colIndex) => {
+				if (cell === 1) {
+					positions.push([rowIndex, colIndex]);
+				}
+			});
+		});
+		return positions;
 	};
+	const snakePositions = findSnakePositions(board);
+	const handleKeyDown = (e) => {
+		if (e.key == "ArrowUp") {
+			// row--;
+		}
+		if (e.key == "ArrowDown") {
+			// row++;
+			console.log(e.key);
+		}
+		if (e.key == "ArrowLeft") {
+			// col--;
+			console.log(e.key);
+		}
+		if (e.key == "ArrowRight") {
+			snakePositions.forEach((e) => {
+				e[1]++;
+			});
+			setBoard();
+		}
+	};
+
 	return (
 		<div className="container">
-			<div className="row">
-				<div className="col col0"></div>
-				<div className="col col1"></div>
-				<div className="col col2"></div>
-				<div className="col col3"></div>
-				<div className="col col4"></div>
-				<div className="col col5"></div>
-				<div className="col col6"></div>
-				<div className="col col7"></div>
-				<div className="col col8"></div>
-				<div className="col col9"></div>
-				<div className="col col10"></div>
-				<div className="col col11"></div>
-				<div className="col col12"></div>
-				<div className="col col13"></div>
-				<div className="col col14"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col "></div>
-				<div className="col snake"></div>
-				<div className="col snake"></div>
-				<div className="col snake"></div>
-				<div className="col snake"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col apple"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
-			<div className="row">
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-				<div className="col"></div>
-			</div>
+			{board.map((row, rowIndex) => (
+				<div key={rowIndex} className="row">
+					{row.map((cell, colIndex) => (
+						<div key={colIndex} className={`cell ${cell === 1 ? "snake" : cell === 2 ? "food" : ""} col`}></div>
+					))}
+				</div>
+			))}
 		</div>
 	);
 };
